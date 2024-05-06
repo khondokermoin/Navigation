@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:id="@+id/homeFragment"
+        android:title="Home"
+        android:icon="@drawable/home"/>
+    <item android:id="@+id/catagoryFragment"
+        android:title="Contact"
+        android:icon="@drawable/category"/>
+    <item android:id="@+id/profielFragment"
+        android:title="SMS System"
+        android:icon="@drawable/user"/>
+    <item android:id="@+id/Share"
+        android:title="Share"
+        android:icon="@drawable/user"/>
+    <item android:id="@+id/About"
+        android:title="About"
+        android:icon="@drawable/user"/>
+
+    <item android:title="Theme">
+        <menu>
+            <item android:id="@+id/Settings"
+                android:icon="@drawable/settings"
+                android:title="Settings"/>
+            <item android:id="@+id/logout"
+                android:title="Logout"
+                android:icon="@drawable/logout">
+            </item>
+        </menu>
+    </item>
+
+</menu>
