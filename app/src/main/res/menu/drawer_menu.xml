@@ -4,10 +4,6 @@
         android:title="Home"
         android:icon="@drawable/home"/>
 
-    <item android:id="@+id/catagoryFragment"
-        android:title="Contact"
-        android:icon="@drawable/contact"/>
-
     <item android:id="@+id/profielFragment"
         android:title="SMS System"
         android:icon="@drawable/chatting"/>
@@ -23,7 +19,7 @@
 
     <item android:title="Others">
         <menu>
-            <item android:id="@+id/Settings"
+            <item android:id="@+id/catagoryFragment"
                 android:icon="@drawable/settings"
                 android:title="Settings"/>
 
