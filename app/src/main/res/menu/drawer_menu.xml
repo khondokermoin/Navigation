@@ -3,24 +3,30 @@
     <item android:id="@+id/homeFragment"
         android:title="Home"
         android:icon="@drawable/home"/>
+
     <item android:id="@+id/catagoryFragment"
         android:title="Contact"
         android:icon="@drawable/contact"/>
+
     <item android:id="@+id/profielFragment"
         android:title="SMS System"
         android:icon="@drawable/chatting"/>
+
     <item android:id="@+id/Share"
         android:title="Share"
         android:icon="@drawable/share"/>
+
     <item android:id="@+id/About"
         android:title="About"
         android:icon="@drawable/information"/>
+
 
     <item android:title="Others">
         <menu>
             <item android:id="@+id/Settings"
                 android:icon="@drawable/settings"
                 android:title="Settings"/>
+
             <item android:id="@+id/logout"
                 android:title="Logout"
                 android:icon="@drawable/logout">

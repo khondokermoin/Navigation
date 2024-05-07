@@ -1,59 +1,104 @@
-package com.example.navigation
+package com.rajkishorbgp.temperatureconverterapp
 
+import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ArrayAdapter
+import android.widget.Toast
+import androidx.fragment.app.Fragment
+import com.example.navigation.databinding.FragmentProfielBinding
+import java.text.DecimalFormat
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-
-/**
- * A simple [Fragment] subclass.
- * Use the [ProfielFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
-class ProfielFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
-    }
+class ProfielFragment : Fragment()  {
+    private lateinit var binding: FragmentProfielBinding
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_profiel, container, false)
+        binding = FragmentProfielBinding.inflate(inflater, container, false)
+        return binding.root
     }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment ProfielFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            ProfielFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
-            }
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        val temperatureUnits = arrayOf(
+            "Celsius", "Kelvin", "Fahrenheit"
+        )
+        val arrayAdapter = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_dropdown_item, temperatureUnits)
+        binding.spinnerFrom.adapter = arrayAdapter
+        binding.spinnerTo.adapter = arrayAdapter
+
+        binding.convertButton.setOnClickListener { convertTemperature() }
     }
+
+    private fun convertTemperature() {
+        val inputTemperatureText = binding.temperatureInput.text.toString()
+        if (inputTemperatureText.isBlank()) {
+            "Please enter a valid numeric value".showToast()
+            return
+        }
+
+        val inputTemperature = inputTemperatureText.toDoubleOrNull()
+        if (inputTemperature == null) {
+            "Please enter a valid numeric value".showToast()
+            return
+        }
+
+        val fromUnitPosition = binding.spinnerFrom.selectedItemPosition
+        val toUnitPosition = binding.spinnerTo.selectedItemPosition
+
+        val conversionResult = calculateConversion(inputTemperature, fromUnitPosition, toUnitPosition)
+        displayResult(conversionResult)
+    }
+
+    private fun calculateConversion(value: Double, fromUnit: Int, toUnit: Int): Double {
+        return when (fromUnit) {
+            0 -> calculateCelsiusToOther(value, toUnit) // Celsius
+            1 -> calculateKelvinToOther(value, toUnit) // Kelvin
+            2 -> calculateFahrenheitToOther(value, toUnit) // Fahrenheit
+            else -> 0.0
+        }
+    }
+
+    private fun calculateCelsiusToOther(celsius: Double, toUnit: Int): Double {
+        return when (toUnit) {
+            0 -> celsius // Celsius
+            1 -> celsius + 273.15 // Kelvin
+            2 -> (celsius * 9 / 5) + 32 // Fahrenheit
+            else -> 0.0
+        }
+    }
+
+    private fun calculateKelvinToOther(kelvin: Double, toUnit: Int): Double {
+        return when (toUnit) {
+            0 -> kelvin - 273.15 // Celsius
+            1 -> kelvin // Kelvin
+            2 -> (kelvin - 273.15) * 9 / 5 + 32 // Fahrenheit
+            else -> 0.0
+        }
+    }
+
+    private fun calculateFahrenheitToOther(fahrenheit: Double, toUnit: Int): Double {
+        return when (toUnit) {
+            0 -> (fahrenheit - 32) * 5 / 9 // Celsius
+            1 -> ((fahrenheit - 32) * 5 / 9) + 273.15 // Kelvin
+            2 -> fahrenheit // Fahrenheit
+            else -> 0.0
+        }
+    }
+
+    private fun displayResult(result: Double) {
+        val resultText = DecimalFormat("#.#####").format(result)
+        binding.conversionResult.text = resultText
+        binding.conversionResult.visibility = View.VISIBLE
+    }
+
+    private fun String.showToast() {
+        Toast.makeText(requireContext(), this, Toast.LENGTH_SHORT).show()
+    }
+
 }
