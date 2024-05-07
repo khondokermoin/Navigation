@@ -8,4 +8,20 @@
     <color name="over_weight">#FF0000</color>
     <color name="obese">#FF3D00</color>
     <color name="dark_ash">#313650</color>
+
+    <!-- Reds -->
+    <color name="salmonColor">#e9575f</color>
+    <color name="brickRedColor">#971b10</color>
+    <color name="easterPinkColor">#f1a7a2</color>
+    <color name="grapefruitColor">#e41f36</color>
+    <color name="pinkColor">#ff5f9a</color>
+    <color name="indianRedColor">#cd5c5c</color>
+    <color name="strawberryColor">#be2625</color>
+    <color name="coralColor">#f08080</color>
+    <color name="maroonColor">#50041c</color>
+    <color name="watermelonColor">#f2473f</color>
+    <color name="tomatoColor">#ff6347</color>
+    <color name="pinkLipstickColor">#ff69b4</color>
+    <color name="paleRoseColor">#ffe4e1</color>
+    <color name="crimsonColor">#bb1224</color>
 </resources>
