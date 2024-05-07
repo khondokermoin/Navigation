@@ -3,7 +3,9 @@
     <item android:id="@+id/homeFragment"
         android:title="Home"
         android:icon="@drawable/home"/>
-    <item android:id="@+id/catagoryFragment"
+
+    <item
+        android:id="@+id/Settings"
         android:title="Contact"
         android:icon="@drawable/contact"/>
     <item android:id="@+id/profielFragment"
@@ -18,7 +20,7 @@
 
     <item android:title="Others">
         <menu>
-            <item android:id="@+id/Settings"
+            <item android:id="@+id/catagoryFragment"
                 android:icon="@drawable/settings"
                 android:title="Settings"/>
             <item android:id="@+id/logout"
