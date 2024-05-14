@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item android:id="@+id/homeFragment"
-        android:title="Home"
+        android:title="@string/home"
         android:icon="@drawable/home"/>
 
-    <item android:id="@+id/profielFragment"
-        android:title="SMS"
-        android:icon="@drawable/chatting"/>
-
     <item android:id="@+id/catagoryFragment"
-        android:title="Settings"
-        android:icon="@drawable/settings"/>
+        android:title="@string/contact"
+        android:icon="@drawable/contact"/>
+
+    <item android:id="@+id/profielFragment"
+        android:title="@string/smsSystem"
+        android:icon="@drawable/sms"/>
 </menu>

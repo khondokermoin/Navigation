@@ -5,15 +5,23 @@ import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import android.view.MenuItem
+import android.widget.TableLayout
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
 import androidx.navigation.ui.setupWithNavController
+import androidx.viewpager.widget.ViewPager
+import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.example.navigation.databinding.ActivityMainBinding
+import com.google.android.material.tabs.TabLayout
 
 class MainActivity : AppCompatActivity() {
+
+    private lateinit var tabLayout: TabLayout
+    private lateinit var viewPager: ViewPager
+    private lateinit var adapter: PageAdapter
     lateinit var actionBarDrawerToggle: ActionBarDrawerToggle
     private val binding by lazy {
         ActivityMainBinding.inflate(layoutInflater)
@@ -21,6 +29,34 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
+
+        tabLayout = findViewById(R.id.tabLayout)
+        viewPager = findViewById(R.id.viewpage)
+
+        adapter = PageAdapter(supportFragmentManager, lifecycle)
+
+        tabLayout.addTab(tabLayout.newTab().setText("Send"))
+        tabLayout.addTab(tabLayout.newTab().setText("Receive"))
+
+        viewPager.adapter = viewPager
+        tabLayout.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
+            override fun onTabSelected(tab: TabLayout.Tab?) {
+                if (tab != null){
+                    viewPager.currentItem = tab.position
+                }
+            }
+
+            override fun onTabUnselected(p0: TabLayout.Tab?) {
+
+            }
+
+            override fun onTabReselected(p0: TabLayout.Tab?) {
+
+            }
+
+        })
+
+
 
         var navController = findNavController(R.id.fragmentContainerView)
         binding.bottomNavigation.setupWithNavController(navController)
@@ -43,18 +79,8 @@ class MainActivity : AppCompatActivity() {
                     binding.drawerlayout.closeDrawers()
                     binding.drawerNav.setupWithNavController(navController)
                 }
-                R.id.Settings->{
-                    binding.drawerlayout.closeDrawers()
-                    Toast.makeText(this, "Enable Dark Theme", Toast.LENGTH_SHORT).show()
-                }
-                R.id.logout->{
-                    binding.drawerlayout.closeDrawers()
-                    Toast.makeText(this, "Enable Light Theme", Toast.LENGTH_SHORT).show()
-                }
-                R.id.logout->{
-                    binding.drawerlayout.closeDrawers()
-                    Toast.makeText(this, "you are logged out", Toast.LENGTH_SHORT).show()
-                }
+
+
             }
             true
         }
